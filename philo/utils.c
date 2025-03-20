@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:09:12 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/10 23:57:39 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/13 02:49:25 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ void precise_sleep(time_t duration)
 	while (get_time_ms() - start_time < duration)
 		usleep(500);
 }
+

@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:21:03 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/11 00:46:30 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:40:19 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ t_data	*init_data(char **av)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
-		data->num_times_to_eat = ft_atoi(av[5]);
+    {
+        data->num_times_to_eat = ft_atoi(av[5]);
+        if (!data->num_times_to_eat)
+            return (NULL);
+    }
 	else
 		data->num_times_to_eat = -1;
 	data->simulation_stop = 0;
@@ -38,6 +42,7 @@ t_data	*init_data(char **av)
 	pthread_mutex_init(&data->print_mutex, NULL);
 	while (i < data->num_of_philos)
 		pthread_mutex_init(&data->forks[i++], NULL);
+	gettimeofday(&data->start_times,NULL);
 	return (data);
 }
 t_philo	*init_philosophers(t_data *data)

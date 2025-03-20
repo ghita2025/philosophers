@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   validation_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 23:09:09 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/09 23:14:59 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:10:24 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-int	is_space(char c)
+int is_space(char c)
 {
 	return (c == ' ' || c == '\t');
 }
 
-int	is_valid_number(char *str)
+int is_valid_number(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (is_space(str[i]))
@@ -37,10 +37,10 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
-int	validate_args(int ac, char **av)
+int validate_args(int ac, char **av)
 {
-	int	i;
-	int	value;
+	int i;
+	int value;
 
 	i = 1;
 	while (i < ac)
@@ -48,22 +48,22 @@ int	validate_args(int ac, char **av)
 		if (!is_valid_number(av[i]))
 			return (0);
 		value = ft_atoi(av[i]);
-		if (value <= 0 || value > INT_MAX)
+		if (value < 0 || value > INT_MAX)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	ft_isdigit(int c)
+int ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_atoi(const char *str)
+int ft_atoi(const char *str)
 {
-	int		sign;
-	long	result;
+	int sign;
+	long result;
 
 	sign = 1;
 	result = 0;

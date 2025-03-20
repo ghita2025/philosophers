@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 05:37:28 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/11 01:38:21 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/13 02:44:39 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,12 @@ int	check_philosopher_death(t_philo *philo)
 	time_t	current_time;
 	time_t	time_since_last_meal;
 
-	// if (is_simulation_stopped(philo->data))
-	// 	return (0);
-
 	current_time = get_time_ms();
 	pthread_mutex_lock(&philo->data->meal_mutex);
 	time_since_last_meal = current_time - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 
-	if (time_since_last_meal >= philo->data->time_to_die)
+	if (time_since_last_meal > philo->data->time_to_die)
 	{
 		stop_simulation(philo->data);
 		return (1);

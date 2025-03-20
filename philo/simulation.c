@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:17:31 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/11 02:46:17 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/18 15:08:21 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int is_active(t_philo *philo)
 void *philosopher_routine(void *arg)
 {
     t_philo *philo;
-    time_t current_time;
 
     philo = (t_philo *)arg;
     if (philo->data->num_of_philos == 1)
@@ -70,17 +69,15 @@ void *monitor_routine(void *arg)
             printf("%ld %d %s\n", get_time_ms() - philosophers[i].data->start_time, philosophers[i].id,
                    "is died");
             pthread_mutex_unlock(&philosophers[i].data->print_mutex);
-            // print_status(&philosophers[i],"is_died");
-            //  stop_simulation(philosophers->data);
             return (NULL);
         }
     }
-
     i++;
     if (i == philosophers->data->num_of_philos)
         i = 0;
-
-    // usleep(500);
+    //}
+    // usleep(1000);
+     return (NULL);
 }
 
 int start_simulation(t_philo *philosophers)

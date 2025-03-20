@@ -24,6 +24,7 @@ typedef struct s_data
 	pthread_mutex_t		meal_mutex;
 	pthread_mutex_t		print_mutex;
 	time_t				start_time;
+	t_time start_times;
 }						t_data;
 
 typedef struct s_philo
@@ -46,11 +47,10 @@ typedef struct s_monitor
 int						is_valid_number(char *str);
 int						validate_args(int ac, char **av);
 
-/* Initialization */
 t_data					*init_data(char **av);
 t_philo					*init_philosophers(t_data *data);
 
-/* Action Functions */
+
 void					print_status(t_philo *philo,
 							char *action);
 void					take_forks(t_philo *philo);
@@ -58,24 +58,24 @@ void					eat_action(t_philo *philo);
 void					sleep_action(t_philo *philo);
 void					think_action(t_philo *philo);
 
-/* Thread Functions */
+
 int						start_simulation(t_philo *philosophers);
 void					*philosopher_routine(void *arg);
 void					*monitor_routine(void *arg);
 
-/* Monitoring */
+
 int						is_simulation_stopped(t_data *data);
 void					stop_simulation(t_data *data);
 int						check_philosopher_death(t_philo *philo);
 int						all_philosophers_satisfied(t_philo *philosophers);
 
-/* Utility Functions */
+
 time_t					get_time_ms(void);
 void					precise_sleep(time_t duration);
 int						ft_atoi(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);
-
+time_t get_time(t_time start, t_time end);
 #endif
 
 // init structs;
