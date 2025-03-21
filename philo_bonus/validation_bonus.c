@@ -6,20 +6,20 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 23:09:09 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/20 16:10:24 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 09:23:40 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
-	return (c == ' ' || c == '\t');
+	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (is_space(str[i]))
@@ -37,37 +37,39 @@ int is_valid_number(char *str)
 	return (1);
 }
 
-int validate_args(int ac, char **av)
+int	validate_args(int ac, char **av)
 {
-	int i;
-	int value;
+	int		i;
+	long	value;
 
 	i = 1;
 	while (i < ac)
 	{
 		if (!is_valid_number(av[i]))
 			return (0);
-		value = ft_atoi(av[i]);
-		if (value < 0 || value > INT_MAX)
+		value = ft_atol(av[i]);
+		if (i == 1 && value == 0)
+			return (0);
+		if (value > INT_MAX)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
 	int sign;
 	long result;
 
 	sign = 1;
 	result = 0;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
+	while (is_space(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{
@@ -78,10 +80,6 @@ int ft_atoi(const char *str)
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + *str - 48;
-		if (result > 2147483647 && sign == 1)
-			return (-1);
-		if (result > 2147483648 && sign == -1)
-			return (0);
 		str++;
 	}
 	return (result * sign);

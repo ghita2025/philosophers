@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 05:37:28 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/13 02:44:39 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:16:09 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	check_philosopher_death(t_philo *philo)
 	pthread_mutex_lock(&philo->data->meal_mutex);
 	time_since_last_meal = current_time - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
-
 	if (time_since_last_meal > philo->data->time_to_die)
 	{
 		stop_simulation(philo->data);
@@ -54,6 +53,8 @@ int	all_philosophers_satisfied(t_philo *philosophers)
 	int	required_meals;
 
 	required_meals = philosophers[0].data->num_times_to_eat;
+	if (required_meals == -1)
+		return (0);
 	all_ate_enough = 1;
 	i = 0;
 	while (i < philosophers[0].data->num_of_philos)
@@ -62,7 +63,6 @@ int	all_philosophers_satisfied(t_philo *philosophers)
 		if (philosophers[i].meals_eaten != required_meals)
 			all_ate_enough = 0;
 		pthread_mutex_unlock(&philosophers[0].data->meal_mutex);
-		
 		if (!all_ate_enough)
 			break ;
 		i++;

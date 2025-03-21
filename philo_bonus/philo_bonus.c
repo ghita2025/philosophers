@@ -6,64 +6,39 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:50 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/20 16:57:44 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 08:15:16 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void *meal_monitor(void *arg)
+void	wait_for_termination(t_philo *philo)
 {
-	t_data *data;
-	int i;
-
-	data = (t_data *)arg;
-	i = 0;
-	while (i < data->num_of_philos)
-	{
-		sem_wait(data->all_eat_sem);
-		i++;
-	}
-	sem_post(data->death_semaphore);
-	return (NULL);
-}
-
-void wait_for_termination(t_philo *philo)
-{
-	pthread_t thread;
-	int i;
-	t_data *data;
+	int		i;
+	t_data	*data;
 
 	data = philo->data;
-
-	if (data->num_times_to_eat > 0)
+	while (1)
 	{
-		if (pthread_create(&thread, NULL, &meal_monitor, data) != 0)
-		{
-			write(1, "Error: Thread creation failed\n", 30);
-			return;
-		}
-		pthread_detach(thread);
+		if (data->death_semaphore->__align == 0
+			|| data->all_eat_sem->__align == 0)
+			break ;
 	}
-	sem_wait(data->death_semaphore);
 	i = 0;
 	while (i < data->num_of_philos)
 	{
 		kill(data->pid[i], SIGKILL);
 		i++;
 	}
-
 	i = 0;
 	while (i < data->num_of_philos)
 	{
 		waitpid(data->pid[i], NULL, 0);
 		i++;
 	}
-	// if (data->num_of_philos > 0)
-	// 	pthread_join(thread, NULL);
 }
 
-void create_processes(t_philo *philo, int i)
+void	create_processes(t_philo *philo, int i)
 {
 	philo->data->pid[i] = fork();
 	if (philo->data->pid[i] < 0)
@@ -82,11 +57,11 @@ void create_processes(t_philo *philo, int i)
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
-	t_philo *philosopher;
-	int i;
+	t_data	*data;
+	t_philo	*philosopher;
+	int		i;
 
 	if (ac < 5 || ac > 6)
 		return (write(1, "Error: wrong number of arguments\n", 34), 1);

@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (write(1, "Error: wrong number of arguments\n", 34), 1);
-	if (!validate_args(ac , av))
+	if (!validate_args(ac, av))
 		return (write(1, "Error: invalid arguments format\n", 33), 1);
 	data = init_data(av);
 	if (!data)

@@ -6,11 +6,23 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:21:03 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/20 17:40:19 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:14:44 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	setarg(t_data *data, char **av)
+{
+	data->num_of_philos = ft_atol(av[1]);
+	data->time_to_die = ft_atol(av[2]);
+	data->time_to_eat = ft_atol(av[3]);
+	data->time_to_sleep = ft_atol(av[4]);
+	if (av[5])
+		data->num_times_to_eat = ft_atol(av[5]);
+	else
+		data->num_times_to_eat = -1;
+}
 
 t_data	*init_data(char **av)
 {
@@ -21,19 +33,10 @@ t_data	*init_data(char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (write(1, "Error: Malloc failed\n", 22), NULL);
-	data->num_of_philos = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
-	if (av[5])
-    {
-        data->num_times_to_eat = ft_atoi(av[5]);
-        if (!data->num_times_to_eat)
-            return (NULL);
-    }
-	else
-		data->num_times_to_eat = -1;
+	setarg(data, av);
 	data->simulation_stop = 0;
+	if (!data->num_times_to_eat)
+		return (NULL);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_of_philos);
 	if (!data->forks)
 		return (free(data), write(1, "Error: Malloc failed\n", 22), NULL);
@@ -42,9 +45,10 @@ t_data	*init_data(char **av)
 	pthread_mutex_init(&data->print_mutex, NULL);
 	while (i < data->num_of_philos)
 		pthread_mutex_init(&data->forks[i++], NULL);
-	gettimeofday(&data->start_times,NULL);
+	gettimeofday(&data->start_times, NULL);
 	return (data);
 }
+
 t_philo	*init_philosophers(t_data *data)
 {
 	t_philo	*philosophers;
@@ -65,7 +69,8 @@ t_philo	*init_philosophers(t_data *data)
 		if (data->num_of_philos == 1)
 			philosophers[i].right_fork = NULL;
 		else
-			philosophers[i].right_fork = &data->forks[(i + 1)% data->num_of_philos];
+			philosophers[i].right_fork = &data->forks[(i + 1)
+				% data->num_of_philos];
 		i++;
 	}
 	return (philosophers);
