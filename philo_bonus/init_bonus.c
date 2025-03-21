@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:33 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:36:14 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:55:04 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ t_data	*init_data(char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (write(1, "Error: Malloc failed\n", 22), NULL);
-	data->num_of_philos = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
+	data->num_of_philos = ft_atol(av[1]);
+	data->time_to_die = ft_atol(av[2]);
+	data->time_to_eat = ft_atol(av[3]);
+	data->time_to_sleep = ft_atol(av[4]);
 	if (av[5])
 	{
-		data->num_times_to_eat = ft_atoi(av[5]);
+		data->num_times_to_eat = ft_atol(av[5]);
 		if (!data->num_times_to_eat)
 			return (NULL);
 	}

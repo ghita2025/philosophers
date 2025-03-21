@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:47:35 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:32:37 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 19:42:16 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,22 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_unlock(philo->left_fork);
 		return ;
 	}
+	if (philo->id % 2 != 0)
+		usleep(2000);
 	if (philo->id % 2 == 0)
-		usleep(100);
-	pthread_mutex_lock(philo->right_fork);
-	print_status(philo, "has taken a fork");
-	pthread_mutex_lock(philo->left_fork);
-	print_status(philo, "has taken a fork");
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(philo->left_fork);
+		print_status(philo, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(philo->right_fork);
+		print_status(philo, "has taken a fork");
+	}
 }
 
 void	eat_action(t_philo *philo)
@@ -52,8 +62,18 @@ void	eat_action(t_philo *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 	precise_sleep(philo->data->time_to_eat);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	if (philo->id % 2 != 0)
+		usleep(100);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+	}
 }
 
 void	sleep_action(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:17:31 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:26:56 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/21 19:43:32 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ void	*monitor_routine(void *arg)
 	i = 0;
 	while (i < philos->data->num_of_philos)
 	{
-		if (all_philosophers_satisfied(philos))
+		if (philos->data->num_times_to_eat > 0)
 		{
-			stop_simulation(philos->data);
-			return (NULL);
+			if (all_philosophers_satisfied(philos))
+			{
+				stop_simulation(philos->data);
+				return (NULL);
+			}
 		}
 		if (check_philosopher_death(&philos[i]))
 		{
@@ -74,6 +77,7 @@ void	*monitor_routine(void *arg)
 		i++;
 		if (i == philos->data->num_of_philos)
 			i = 0;
+		// usleep(1000);
 	}
 	return (NULL);
 }

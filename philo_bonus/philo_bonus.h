@@ -64,7 +64,7 @@ int						all_philosophers_satisfied(t_philo *philosophers);
 
 time_t					get_time_ms(void);
 void					precise_sleep(time_t duration);
-int						ft_atol(const char *str);
+long						ft_atol(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);
 void					close_semaphores(t_data *data);

@@ -1,6 +1,6 @@
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra -fsanitize=undefined -fsanitize=thread
 
 SRC = actions.c init.c monitor.c philo.c simulation.c utils.c validation.c
 
