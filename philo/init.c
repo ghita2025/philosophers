@@ -6,11 +6,26 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:21:03 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/23 14:40:44 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 16:14:17 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	even_init(t_philo *philo, int i, t_data *data)
+{
+	philo->left_fork = &data->forks[i];
+	philo->right_fork = &data->forks[(i + 1) % data->num_of_philos];
+}
+
+void	odd_init(t_philo *philo, int i, t_data *data)
+{
+	philo->right_fork = &data->forks[i];
+	if (data->num_of_philos == 1)
+		philo->left_fork = NULL;
+	else
+		philo->left_fork = &data->forks[(i + 1) % data->num_of_philos];
+}
 
 void	setarg(t_data *data, char **av)
 {
@@ -66,45 +81,10 @@ t_philo	*init_philosophers(t_data *data)
 		philosophers[i].meals_eaten = 0;
 		philosophers[i].data = data;
 		if (philosophers[i].id % 2 == 0)
-		{
-			philosophers[i].left_fork = &data->forks[i];
-			if (data->num_of_philos == 1)
-				philosophers[i].right_fork = NULL;
-			else
-				philosophers[i].right_fork = &data->forks[(i + 1)
-					% data->num_of_philos];
-		}
+			even_init(&philosophers[i], i, data);
 		else
-		{
-			philosophers[i].left_fork = &data->forks[(i + 1)
-				% data->num_of_philos];
-			philosophers[i].right_fork = &data->forks[i];
-		}
+			odd_init(&philosophers[i], i, data);
 		i++;
 	}
 	return (philosophers);
 }
-
-// if (philosophers[i].id % 2 != 0)
-// 		{
-// 			philosophers[i].left_fork = &data->forks[i];
-// 			if (data->num_of_philos == 1)
-// 				philosophers[i].right_fork = NULL;
-// 			else
-// 				philosophers[i].right_fork = &data->forks[(i + 1)
-// 					% data->num_of_philos];
-// 		}
-// 		else
-// 		{
-// 			philosophers[i].left_fork = &data->forks[(i + 1)
-// 				% data->num_of_philos];
-// 			philosophers[i].right_fork = &data->forks[i];
-// 		}
-// 		i++;
-
-// if (data->num_of_philos == 1)
-// 			philosophers[i].right_fork = NULL;
-// 		else
-// 			philosophers[i].right_fork = &data->forks[(i + 1)
-// 				% data->num_of_philos];
-// 		i++;

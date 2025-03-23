@@ -29,4 +29,3 @@ void	precise_sleep(time_t duration)
 	while (get_time_ms() - start_time < duration)
 		usleep(500);
 }
-

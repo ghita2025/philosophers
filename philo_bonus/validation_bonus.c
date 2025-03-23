@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 23:09:09 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 09:23:40 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:53:31 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	ft_isdigit(int c)
 
 long	ft_atol(const char *str)
 {
-	int sign;
-	long result;
+	long	result;
+	int		sign;
 
 	sign = 1;
 	result = 0;

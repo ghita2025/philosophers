@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:47:35 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/23 15:48:01 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 16:28:59 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_status(t_philo *philo, char *action)
 	current_time = get_time_ms();
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (!is_simulation_stopped(philo->data))
-	printf("%ld %d %s\n", current_time - philo->data->start_time, philo->id,
+		printf("%ld %d %s\n", current_time - philo->data->start_time, philo->id,
 			action);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
@@ -30,26 +30,16 @@ void	take_forks(t_philo *philo)
 {
 	if (philo->data->num_of_philos == 1)
 	{
-		pthread_mutex_lock(philo->left_fork);
+		pthread_mutex_lock(philo->right_fork);
 		print_status(philo, "has taken a fork");
 		precise_sleep(philo->data->time_to_die, philo->data);
-		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
-	// if (philo->id % 2 == 0)
-	// {
-	// pthread_mutex_lock(philo->right_fork);
-	// print_status(philo, "has taken a fork");
-	// pthread_mutex_lock(philo->left_fork);
-	// print_status(philo, "has taken a fork");
-	// }
-	// else
-	// {
 	pthread_mutex_lock(philo->right_fork);
 	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->left_fork);
 	print_status(philo, "has taken a fork");
-	// }
 }
 
 void	eat_action(t_philo *philo)
@@ -60,16 +50,8 @@ void	eat_action(t_philo *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 	precise_sleep(philo->data->time_to_eat, philo->data);
-	// if (philo->id % 2 == 0)
-	// {
-	// pthread_mutex_unlock(philo->right_fork);
-	// pthread_mutex_unlock(philo->left_fork);
-	// }
-	// else
-	// {
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
-	// }
 }
 
 void	sleep_action(t_philo *philo)
@@ -80,7 +62,7 @@ void	sleep_action(t_philo *philo)
 
 void	think_action(t_philo *philo)
 {
-	if (philo->data->num_of_philos % 2 != 0  )
+	if (philo->data->num_of_philos % 2 != 0)
 		usleep(500);
 	print_status(philo, "is thinking");
 }

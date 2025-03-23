@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 16:29:20 by gstitou           #+#    #+#             */
+/*   Updated: 2025/03/23 16:30:03 by gstitou          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -38,20 +50,13 @@ typedef struct s_philo
 	t_data				*data;
 }						t_philo;
 
-typedef struct s_monitor
-{
-	pthread_t			thread;
-	t_philo				*philos;
-}						t_monitor;
-
 int						is_valid_number(char *str);
 int						validate_args(int ac, char **av);
 
 t_data					*init_data(char **av);
 t_philo					*init_philosophers(t_data *data);
 
-void	print_status(t_philo *philo,
-					char *action);
+void					print_status(t_philo *philo, char *action);
 void					take_forks(t_philo *philo);
 void					eat_action(t_philo *philo);
 void					sleep_action(t_philo *philo);
@@ -71,10 +76,5 @@ void					precise_sleep(time_t duration, t_data *data);
 long					ft_atol(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);
-time_t					get_time(t_time start, t_time end);
-#endif
 
-// init structs;
-//  lanch my threads
-// lanch my monitor
-//  free and return
+#endif

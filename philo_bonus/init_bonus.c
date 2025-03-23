@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:33 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:55:04 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:53:59 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	creat_semaphores(t_data *data)
 	data->all_eat_sem = sem_open("/all_eat_sem", O_CREAT, 0644,
 			data->num_of_philos);
 	if (data->meal_semaphore == SEM_FAILED
-		|| data->print_semaphore == SEM_FAILED ||
-		data->forks == SEM_FAILED || data->death_semaphore == SEM_FAILED ||
-		data->all_eat_sem == SEM_FAILED)
+		|| data->print_semaphore == SEM_FAILED
+		|| data->forks == SEM_FAILED || data->death_semaphore == SEM_FAILED
+		|| data->all_eat_sem == SEM_FAILED)
 	{
 		close_semaphores(data);
 		free(data);

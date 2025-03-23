@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 17:51:37 by gstitou           #+#    #+#             */
+/*   Updated: 2025/03/23 17:51:56 by gstitou          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
@@ -46,8 +58,7 @@ int						validate_args(int ac, char **av);
 t_data					*init_data(char **av);
 t_philo					*init_philosopher(t_data *data);
 
-void	print_status(t_philo *philo,
-					char *action);
+void					print_status(t_philo *philo, char *action);
 void					take_forks(t_philo *philo);
 void					eat_action(t_philo *philo);
 void					sleep_action(t_philo *philo);
@@ -64,7 +75,7 @@ int						all_philosophers_satisfied(t_philo *philosophers);
 
 time_t					get_time_ms(void);
 void					precise_sleep(time_t duration);
-long						ft_atol(const char *str);
+long					ft_atol(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);
 void					close_semaphores(t_data *data);

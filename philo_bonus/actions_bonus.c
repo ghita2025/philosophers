@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:30 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:35:37 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:50:36 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_status(t_philo *philo, char *action)
 	current_time = get_time_ms();
 	sem_wait(philo->data->print_semaphore);
 	printf("%ld %d %s\n", current_time - philo->data->start_time, philo->id,
-			action);
+		action);
 	sem_post(philo->data->print_semaphore);
 }
 
@@ -33,8 +33,6 @@ void	take_forks(t_philo *philo)
 		sem_post(philo->data->forks);
 		return ;
 	}
-	if (philo->id % 2 != 0)
-		usleep(100);
 	sem_wait(philo->data->forks);
 	print_status(philo, "has taken a fork");
 	sem_wait(philo->data->forks);
@@ -61,5 +59,7 @@ void	sleep_action(t_philo *philo)
 
 void	think_action(t_philo *philo)
 {
+	if (philo->data->num_of_philos % 2 != 0)
+		usleep(500);
 	print_status(philo, "is thinking");
 }

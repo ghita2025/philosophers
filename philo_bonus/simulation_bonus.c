@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:53 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:40:02 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:52:05 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	*monitor_routine(void *arg)
 		{
 			sem_wait(philosopher->data->print_semaphore);
 			printf("%ld %d %s\n", get_time_ms() - philosopher->data->start_time,
-					philosopher->id, "died");
+				philosopher->id, "died");
 			sem_wait(philosopher->data->death_semaphore);
 			return (NULL);
 		}
-		// usleep(500);
+		usleep(1000);
 	}
 	return (NULL);
 }
@@ -50,6 +50,8 @@ void	start_simulation(t_philo *philo)
 		take_forks(philo);
 		return ;
 	}
+	if (philo->id % 2 != 0)
+		usleep(1000);
 	while (1)
 	{
 		take_forks(philo);
