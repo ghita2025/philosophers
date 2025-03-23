@@ -37,10 +37,10 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
-int validate_args(int ac, char **av)
+int	validate_args(int ac, char **av)
 {
-	int i;
-	long value;
+	int		i;
+	long	value;
 
 	i = 1;
 	while (i < ac)
@@ -48,7 +48,7 @@ int validate_args(int ac, char **av)
 		if (!is_valid_number(av[i]))
 			return (0);
 		value = ft_atol(av[i]);
-		if (i == 1  && value == 0)
+		if (i == 1 && value == 0)
 			return (0);
 		if (value > INT_MAX)
 			return (0);
@@ -57,15 +57,15 @@ int validate_args(int ac, char **av)
 	return (1);
 }
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-long ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
-	int sign;
-	long result;
+	int		sign;
+	long	result;
 
 	sign = 1;
 	result = 0;

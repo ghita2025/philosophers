@@ -67,7 +67,7 @@ int						check_philosopher_death(t_philo *philo);
 int						all_philosophers_satisfied(t_philo *philosophers);
 
 time_t					get_time_ms(void);
-void					precise_sleep(time_t duration);
+void					precise_sleep(time_t duration, t_data *data);
 long					ft_atol(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);

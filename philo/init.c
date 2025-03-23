@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:21:03 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 13:14:44 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:40:44 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,46 @@ t_philo	*init_philosophers(t_data *data)
 		philosophers[i].last_meal_time = data->start_time;
 		philosophers[i].meals_eaten = 0;
 		philosophers[i].data = data;
-		philosophers[i].left_fork = &data->forks[i];
-		if (data->num_of_philos == 1)
-			philosophers[i].right_fork = NULL;
+		if (philosophers[i].id % 2 == 0)
+		{
+			philosophers[i].left_fork = &data->forks[i];
+			if (data->num_of_philos == 1)
+				philosophers[i].right_fork = NULL;
+			else
+				philosophers[i].right_fork = &data->forks[(i + 1)
+					% data->num_of_philos];
+		}
 		else
-			philosophers[i].right_fork = &data->forks[(i + 1)
+		{
+			philosophers[i].left_fork = &data->forks[(i + 1)
 				% data->num_of_philos];
+			philosophers[i].right_fork = &data->forks[i];
+		}
 		i++;
 	}
 	return (philosophers);
 }
+
+// if (philosophers[i].id % 2 != 0)
+// 		{
+// 			philosophers[i].left_fork = &data->forks[i];
+// 			if (data->num_of_philos == 1)
+// 				philosophers[i].right_fork = NULL;
+// 			else
+// 				philosophers[i].right_fork = &data->forks[(i + 1)
+// 					% data->num_of_philos];
+// 		}
+// 		else
+// 		{
+// 			philosophers[i].left_fork = &data->forks[(i + 1)
+// 				% data->num_of_philos];
+// 			philosophers[i].right_fork = &data->forks[i];
+// 		}
+// 		i++;
+
+// if (data->num_of_philos == 1)
+// 			philosophers[i].right_fork = NULL;
+// 		else
+// 			philosophers[i].right_fork = &data->forks[(i + 1)
+// 				% data->num_of_philos];
+// 		i++;
