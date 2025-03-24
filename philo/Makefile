@@ -1,6 +1,6 @@
 NAME = philo
 CC = cc
-CFLAGS = #-fsanitize=thread -g3
+CFLAGS = -Wall -Werror -Wextra
 
 SRC = actions.c init.c monitor.c philo.c simulation.c utils.c validation.c
 

@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:53 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/23 17:52:05 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:02:18 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	start_simulation(t_philo *philo)
 	if (philo->data->num_of_philos == 1)
 	{
 		take_forks(philo);
+		usleep(2000);
 		return ;
 	}
 	if (philo->id % 2 != 0)

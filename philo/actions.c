@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 04:47:35 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/23 16:28:59 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:58:31 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_status(philo, "has taken a fork");
-		precise_sleep(philo->data->time_to_die, philo->data);
+		precise_sleep(philo->data->time_to_die);
 		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
@@ -49,7 +49,7 @@ void	eat_action(t_philo *philo)
 	philo->last_meal_time = get_time_ms();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
-	precise_sleep(philo->data->time_to_eat, philo->data);
+	precise_sleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
@@ -57,12 +57,12 @@ void	eat_action(t_philo *philo)
 void	sleep_action(t_philo *philo)
 {
 	print_status(philo, "is sleeping");
-	precise_sleep(philo->data->time_to_sleep, philo->data);
+	precise_sleep(philo->data->time_to_sleep);
 }
 
 void	think_action(t_philo *philo)
 {
+	print_status(philo, "is thinking");
 	if (philo->data->num_of_philos % 2 != 0)
 		usleep(500);
-	print_status(philo, "is thinking");
 }

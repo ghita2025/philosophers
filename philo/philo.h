@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:29:20 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/23 16:30:03 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:57:51 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int						check_philosopher_death(t_philo *philo);
 int						all_philosophers_satisfied(t_philo *philosophers);
 
 time_t					get_time_ms(void);
-void					precise_sleep(time_t duration, t_data *data);
+void					precise_sleep(time_t duration);
 long					ft_atol(const char *str);
 int						ft_isdigit(int c);
 void					cleanup(t_philo *philosophers);

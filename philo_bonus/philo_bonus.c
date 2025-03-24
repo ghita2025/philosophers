@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 04:45:50 by gstitou           #+#    #+#             */
-/*   Updated: 2025/03/21 08:15:16 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/03/24 08:19:02 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	create_processes(t_philo *philo, int i)
 	{
 		philo->id = i + 1;
 		start_simulation(philo);
-		exit(0);
 	}
 }
 
